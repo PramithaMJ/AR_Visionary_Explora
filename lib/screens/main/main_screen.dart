@@ -5,6 +5,8 @@ import 'package:ar_visionary_explora/screens/main/myhome/homeScreen.dart';
 import 'package:ar_visionary_explora/screens/main/myhome/item_upload_screen.dart';
 import 'package:ar_visionary_explora/screens/main/profile/profile.dart';
 import 'package:ar_visionary_explora/screens/main/search/search.dart';
+import 'package:ar_visionary_explora/utils/constants/app_colors.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -35,37 +37,61 @@ class _MainScreenState extends State<MainScreen> {
     // HomeScreen(),
   ];
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: _screens.elementAt(_activeIndex),
+//       bottomNavigationBar: Container(
+//         height: 83,
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           children: [
+//             BottomNavTile(
+//               icon: Icons.home,
+//               isActive: _activeIndex == 0,
+//               onTap: () => onItemTaped(0),
+//             ),
+//             BottomNavTile(
+//               icon: Icons.camera,
+//               isActive: _activeIndex == 1,
+//               onTap: () => onItemTaped(1),
+//             ),
+//             BottomNavTile(
+//               icon: Icons.person,
+//               isActive: _activeIndex == 2,
+//               onTap: () => onItemTaped(2),
+//             ),
+//             // BottomNavTile(
+//             //   icon: Icons.store,
+//             //   isActive: _activeIndex == 4,
+//             //   onTap: () => onItemTaped(4),
+//             // ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens.elementAt(_activeIndex),
-      bottomNavigationBar: Container(
-        height: 83,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BottomNavTile(
-              icon: Icons.home,
-              isActive: _activeIndex == 0,
-              onTap: () => onItemTaped(0),
-            ),
-            BottomNavTile(
-              icon: Icons.camera,
-              isActive: _activeIndex == 1,
-              onTap: () => onItemTaped(1),
-            ),
-            BottomNavTile(
-              icon: Icons.person,
-              isActive: _activeIndex == 2,
-              onTap: () => onItemTaped(2),
-            ),
-            // BottomNavTile(
-            //   icon: Icons.store,
-            //   isActive: _activeIndex == 4,
-            //   onTap: () => onItemTaped(4),
-            // ),
-          ],
-        ),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.white,
+        color: AppColors.primaryColor,
+        buttonBackgroundColor: Colors.white,
+        height: 60,
+        items: <Widget>[
+          Icon(Icons.home, size: 40),
+          Icon(Icons.camera, size: 40),
+          Icon(Icons.person, size: 40),
+          // Icon(Icons.store, size: 30),
+        ],
+        onTap: (index) {
+          setState(() {
+            _activeIndex = index;
+          });
+        },
       ),
     );
   }
