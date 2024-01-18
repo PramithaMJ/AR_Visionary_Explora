@@ -64,91 +64,95 @@ class _ProductDetailsState extends State<ProductDetails> {
 
             print(itemsInfo);
 
-            return SizedBox(
-              width: SizeConfig.w(context),
-              height: SizeConfig.h(context),
-              child: Stack(
-                children: [
-                  UpperSection(itemsInfo: itemsInfo),
-                  Positioned(
-                    top: 440,
-                    child: ProductDetailsSection(itemsInfo: itemsInfo),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomButton(
-                            text: "Add to Cart",
-                            onTap: () {
-                              // Show a confirmation dialog
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Add to Cart"),
-                                    content: Text(
-                                        "Do you want to keep shopping or go to the cart?"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pop(); // Close the dialog
-                                          // Access the CartProvider and add the item to the cart
-                                          final cartProvider =
-                                              Provider.of<CartProvider>(context,
-                                                  listen: false);
-                                          cartProvider.addToCart(itemsInfo);
-                                          showNotification(
-                                              'Item added to cart', context);
-                                        },
-                                        child: Text("Keep Shopping"),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context)
-                                              .pop(); // Close the dialog
-                                          // Navigate to the cart screen
-                                          final cartProvider =
-                                              Provider.of<CartProvider>(context,
-                                                  listen: false);
-                                          cartProvider.addToCart(itemsInfo);
-                                          Helpers.navigateToPage(
-                                              context, const Cart());
-                                        },
-                                        child: Text("Go to Cart"),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          CustomButton(
-                            text: "Try AR View",
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (c) => VirtualARViewScreen(
-                                    clickedItemImageLink:
-                                        itemsInfo.itemImage.toString(),
+            return SafeArea(
+              child: SizedBox(
+                width: SizeConfig.w(context),
+                height: SizeConfig.h(context),
+                child: Stack(
+                  children: [
+                    UpperSection(itemsInfo: itemsInfo),
+                    Positioned(
+                      top: 440,
+                      child: ProductDetailsSection(itemsInfo: itemsInfo),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            CustomButton(
+                              text: "Add to Cart",
+                              onTap: () {
+                                // Show a confirmation dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Add to Cart"),
+                                      content: const Text(
+                                          "Do you want to keep shopping or go to the cart?"),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog
+                                            // Access the CartProvider and add the item to the cart
+                                            final cartProvider =
+                                                Provider.of<CartProvider>(
+                                                    context,
+                                                    listen: false);
+                                            cartProvider.addToCart(itemsInfo);
+                                            showNotification(
+                                                'Item added to cart', context);
+                                          },
+                                          child: const Text("Keep Shopping"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog
+                                            // Navigate to the cart screen
+                                            final cartProvider =
+                                                Provider.of<CartProvider>(
+                                                    context,
+                                                    listen: false);
+                                            cartProvider.addToCart(itemsInfo);
+                                            Helpers.navigateToPage(
+                                                context, const Cart());
+                                          },
+                                          child: const Text("Go to Cart"),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            CustomButton(
+                              text: "Try AR View",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (c) => VirtualARViewScreen(
+                                      clickedItemImageLink:
+                                          itemsInfo.itemImage.toString(),
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           } else if (snapshot.hasError) {
