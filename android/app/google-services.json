@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "408294414641",
+    "project_id": "ar-visionary-explora-2ca98",
+    "storage_bucket": "ar-visionary-explora-2ca98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408294414641:android:82a6668106c11a7701b810",
+        "android_client_info": {
+          "package_name": "com.example.ar_visionary_explora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408294414641-b0dkmt08ops82uh84upon7gabp91cv68.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ar_visionary_explora",
+            "certificate_hash": "edbc870150713513a7fab212c47d3706eed45660"
+          }
+        },
+        {
+          "client_id": "408294414641-1rc6kvmfp5u2b5glk28rlp3uq39fj173.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATkBkFdPL8neye9j0kkBLKlcsKoxWzY_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408294414641-1rc6kvmfp5u2b5glk28rlp3uq39fj173.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408294414641-j9fdhpd1s7cnu5n8n60dgtbo93somrlj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.arVisionaryExplora.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

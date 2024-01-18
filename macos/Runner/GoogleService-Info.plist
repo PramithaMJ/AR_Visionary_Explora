@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDi1aGYJpCQvoKt674bB6L5vBG_EHvrbo8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>408294414641</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.arVisionaryExplora.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>ar-visionary-explora-2ca98</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ar-visionary-explora-2ca98.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:408294414641:ios:1c7017daec614c6b01b810</string>
+</dict>
+</plist>
