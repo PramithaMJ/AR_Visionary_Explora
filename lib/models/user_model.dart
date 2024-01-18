@@ -32,4 +32,6 @@ class UserModel {
       map['img'] as String,
     );
   }
+
+ 
 }

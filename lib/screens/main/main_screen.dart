@@ -78,8 +78,8 @@ class _MainScreenState extends State<MainScreen> {
       body: _screens.elementAt(_activeIndex),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color: AppColors.primaryColor,
-        buttonBackgroundColor: Colors.white,
+        color: const Color.fromARGB(255, 222, 179, 157),
+        buttonBackgroundColor: Color.fromARGB(255, 198, 192, 192),
         height: 60,
         items: <Widget>[
           Icon(Icons.home, size: 40),

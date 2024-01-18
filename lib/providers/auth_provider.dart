@@ -7,6 +7,7 @@ import 'package:ar_visionary_explora/screens/main/main_screen.dart';
 import 'package:ar_visionary_explora/utils/helpers/alert_helpers.dart';
 import 'package:ar_visionary_explora/utils/helpers/helpers.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,6 +15,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
 class AuthProvider extends ChangeNotifier {
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
   /// auth controller object
   AuthConroller _authConroller = AuthConroller();
 
@@ -266,6 +269,40 @@ class AuthProvider extends ChangeNotifier {
       }
     } catch (e) {
       Logger().e(e);
+    }
+  }
+
+
+  // Update user profile (username and email)
+  Future<void> updateUserProfile(
+      BuildContext context, String newUserName) async {
+    User? user = FirebaseAuth.instance.currentUser;
+    try {
+      setLoading(true);
+
+      // Update username and email in FirebaseAuth
+     // await user?.updatePassword(newPassword);
+      await user?.updateDisplayName(newUserName);
+
+      // Update in Firestore
+      await users.doc(user?.uid).update({
+        'userName': newUserName,
+      //  'password': newPassword,
+      });
+
+      // Update the local user model
+      if (_userModel != null) {
+        _userModel!.userName = newUserName;
+       // _userModel!.password = newPassword;
+        notifyListeners();
+      }
+
+      setLoading(false);
+      AlertHelpers.showAlert(context, "Profile updated successfully",
+          type: DialogType.success);
+    } on FirebaseAuthException catch (e) {
+      setLoading(false);
+      AlertHelpers.showAlert(context, e.message ?? "An error occurred");
     }
   }
 }

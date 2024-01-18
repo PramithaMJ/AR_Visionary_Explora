@@ -114,10 +114,10 @@ class ProductGrid extends StatelessWidget {
             return Text("Error: ${snapshot.error}");
           } else {
             // Use a custom loading indicator
-            return Center(
+            return const Center(
               child: SpinKitFadingCircle(
-                color: Colors.blue, // Choose your desired color
-                size: 50.0, // Choose your desired size
+                color: AppColors.primaryColor, // Choose your desired color
+                size: 100.0, // Choose your desired size
               ),
             );
           }

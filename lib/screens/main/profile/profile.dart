@@ -87,11 +87,50 @@ class _ProfileState extends State<Profile> {
                     },
                   ),
                 ),
+                SizedBox(height: 20),
+                ProfileUpdateForm(),
               ],
+             
             );
+            
           },
         )),
       ),
+    );
+  }
+}
+
+class ProfileUpdateForm extends StatefulWidget {
+  @override
+  _ProfileUpdateFormState createState() => _ProfileUpdateFormState();
+}
+
+class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
+    return Column(
+      children: [
+        TextField(
+          controller: _usernameController,
+          decoration: InputDecoration(labelText: 'New Username'),
+        ),
+        // TextField(
+        //   controller: _emailController,
+        //   decoration: InputDecoration(labelText: 'New Email'),
+        // ),
+        ElevatedButton(
+          onPressed: () {
+            authProvider.updateUserProfile(
+                context, _usernameController.text);
+          },
+          child: Text('Update Profile'),
+        ),
+      ],
     );
   }
 }
