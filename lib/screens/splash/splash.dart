@@ -6,6 +6,7 @@ import 'package:ar_visionary_explora/utils/constants/app_colors.dart';
 import 'package:ar_visionary_explora/screens/auth/signup.dart';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
@@ -42,13 +43,19 @@ class _SplashState extends State<Splash> {
               width: 331,
               height: 331,
             ),
+            Lottie.asset(
+              // Replace with your Lottie JSON file path
+              'assets/lottie/splashScreen.json',
+              width: 300,
+              height: 300,
+            ),
             const SizedBox(
               height: 72,
             ),
             FadeInUp(
               child: const CustomText(
                 "Build your own Reality with Us..\nAR Visionary Explora",
-                fontSize: 30,
+                fontSize: 20,
                 textAlign: TextAlign.center,
                 color: AppColors.primaryColor,
                 fontWeight: FontWeight.w500,
