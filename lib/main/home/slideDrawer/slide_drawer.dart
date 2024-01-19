@@ -1,4 +1,5 @@
 import 'package:ar_visionary_explora/providers/auth_provider.dart';
+import 'package:ar_visionary_explora/aboutUs/screen/about_us.dart';
 import 'package:ar_visionary_explora/utils/constants/app_assets.dart';
 import 'package:ar_visionary_explora/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,8 @@ class SlideDrawer extends StatelessWidget {
                 ListTile(
                   title: Text('About Us'),
                   onTap: () {
-                    // Handle tap
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (c) => AboutUsPage()));
                   },
                 ),
                 ListTile(

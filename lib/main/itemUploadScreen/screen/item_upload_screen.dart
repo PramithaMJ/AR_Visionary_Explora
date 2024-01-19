@@ -341,7 +341,7 @@ class _ItemUploadScreenState extends State<ItemUploadScreen> {
                 backgroundColor: AppColors.primaryColor,
               ),
               child: const Text(
-                "Add New Item",
+                "Scan New Item",
                 style: TextStyle(color: Colors.white),
               ),
             ),
