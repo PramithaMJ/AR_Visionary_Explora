@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:ar_visionary_explora/controllers/auth_controller.dart';
+import 'package:ar_visionary_explora/main/main_screen.dart';
 import 'package:ar_visionary_explora/models/user_model.dart';
 import 'package:ar_visionary_explora/screens/auth/signup.dart';
-import 'package:ar_visionary_explora/screens/main/main_screen.dart';
 import 'package:ar_visionary_explora/utils/helpers/alert_helpers.dart';
 import 'package:ar_visionary_explora/utils/helpers/helpers.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -32,6 +32,17 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController _password = TextEditingController();
 
   TextEditingController get password => _password;
+
+  // Re-entered password textfield controller
+  final TextEditingController _reEnterPassword = TextEditingController();
+
+  TextEditingController get reEnterPassword => _reEnterPassword;
+
+  final TextEditingController _oldPassword = TextEditingController();
+  final TextEditingController _newPassword = TextEditingController();
+
+  TextEditingController get oldPassword => _oldPassword;
+  TextEditingController get newPassword => _newPassword;
 
   ///
   /// validate text input
@@ -72,7 +83,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> startSignup(BuildContext context) async {
     try {
       /// validate the input
-      if (validateField(context)) {
+      if (validateField(context)  && validatePasswords(context)) {
         // start the loader
         setLoading(true);
         // start creating the user
@@ -305,4 +316,41 @@ class AuthProvider extends ChangeNotifier {
       AlertHelpers.showAlert(context, e.message ?? "An error occurred");
     }
   }
+
+  // Validate if passwords match
+  bool validatePasswords(BuildContext context) {
+    if (_password.text != _reEnterPassword.text) {
+      Logger().w("Passwords do not match");
+      AlertHelpers.showAlert(context, "Passwords do not match");
+      return false;
+    }
+    return true;
+  }
+Future<void> resetPassword(BuildContext context) async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    // Create credential with old password
+    AuthCredential credential = EmailAuthProvider.credential(
+        email: user!.email!, password: _oldPassword.text);
+
+    try {
+      // Reauthenticate user with old password
+      await user.reauthenticateWithCredential(credential).then((_) async {
+        // If reauthentication is successful, update to the new password
+        await user.updatePassword(_newPassword.text);
+        Logger().i("Password updated successfully");
+
+        // Clear the password controllers
+        _oldPassword.clear();
+        _newPassword.clear();
+        AlertHelpers.showAlert(context, "Password updated successfully",
+            type: DialogType.success);
+      });
+    } on FirebaseAuthException catch (e) {
+      Logger().e("Error updating password: ${e.message}");
+      AlertHelpers.showAlert(
+          context, e.message ?? "An error occurred during password update");
+    }
+  }
+
 }

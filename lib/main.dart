@@ -1,6 +1,7 @@
+import 'package:ar_visionary_explora/main/cart/provider/CartProvider.dart';
+import 'package:ar_visionary_explora/main/myhome/firebase_options.dart';
 import 'package:ar_visionary_explora/providers/auth_provider.dart';
-import 'package:ar_visionary_explora/screens/main/cart/provider/CartProvider.dart';
-import 'package:ar_visionary_explora/screens/main/myhome/firebase_options.dart';
+import 'package:ar_visionary_explora/providers/theme_provider.dart';
 import 'package:ar_visionary_explora/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeModeProvider()),
       ],
       child: const MyApp(),
     ),

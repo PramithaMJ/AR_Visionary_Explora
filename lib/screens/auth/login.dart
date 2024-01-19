@@ -9,7 +9,6 @@ import 'package:ar_visionary_explora/providers/auth_provider.dart';
 import 'package:ar_visionary_explora/utils/constants/app_assets.dart';
 import 'package:ar_visionary_explora/utils/constants/app_colors.dart';
 import 'package:ar_visionary_explora/screens/auth/fogot_password.dart';
-import 'package:ar_visionary_explora/screens/main/main_screen.dart';
 import 'package:ar_visionary_explora/utils/helpers/alert_helpers.dart';
 import 'package:ar_visionary_explora/utils/helpers/helpers.dart';
 import 'package:flutter/material.dart';

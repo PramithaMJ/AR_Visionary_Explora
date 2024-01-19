@@ -22,6 +22,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  bool _obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,11 +66,46 @@ class _SignupState extends State<Signup> {
                 CustomerTextField(
                   hintText: "Enter your Password",
                   labelText: "Password",
-                  isObscure: true,
+                  isObscure: _obscurePassword,
                   controller: Provider.of<AuthProvider>(context).password,
                 ),
                 const SizedBox(
                   height: 10,
+                ),
+                Column(
+                  children: [
+                    // CustomerTextField(
+                    //   hintText: "Enter your Password",
+                    //   labelText: "Password",
+                    //   isObscure: _obscurePassword,
+                    //   controller:
+                    //       Provider.of<AuthProvider>(context).loginPassword,
+                    // ),
+                    const SizedBox(height: 10),
+                    CustomerTextField(
+                      hintText: "Re-enter your Password",
+                      labelText: "Re-enter Password",
+                      isObscure: _obscurePassword,
+                      controller:
+                          Provider.of<AuthProvider>(context).reEnterPassword,
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton.icon(
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      label: Text(
+                          _obscurePassword ? 'Show Password' : 'Hide Password'),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                  ],
                 ),
                 Align(
                   alignment: Alignment.centerRight,
