@@ -23,6 +23,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final GlobalKey globalKeyOne = GlobalKey();
+  final GlobalKey globalKeyTwo = GlobalKey();
+  final GlobalKey globalKeyThree = GlobalKey();
+  final GlobalKey globalKeyFour = GlobalKey();
+
   @override
   void initState() {
     super.initState();
