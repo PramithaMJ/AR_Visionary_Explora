@@ -4,13 +4,19 @@ import 'package:ar_visionary_explora/components/custom_text.dart';
 import 'package:ar_visionary_explora/components/custom_textfield.dart';
 import 'package:ar_visionary_explora/components/cutomer_button.dart';
 import 'package:ar_visionary_explora/controllers/auth_controller.dart';
-import 'package:ar_visionary_explora/providers/auth_provider.dart';
+import 'package:ar_visionary_explora/main/home/screeen/home.dart';
+import 'package:ar_visionary_explora/providers/auth_provider.dart'
+    as MyAuthProvider;
 import 'package:ar_visionary_explora/screens/auth/login.dart';
 import 'package:ar_visionary_explora/utils/helpers/alert_helpers.dart';
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 import '../../utils/constants/app_colors.dart';
 
@@ -50,7 +56,8 @@ class _SignupState extends State<Signup> {
                 CustomerTextField(
                   hintText: "Enter your UserName",
                   labelText: "Username",
-                  controller: Provider.of<AuthProvider>(context).userName,
+                  controller: Provider.of<MyAuthProvider.AuthProvider>(context)
+                      .userName,
                 ),
                 const SizedBox(
                   height: 10,
@@ -58,7 +65,8 @@ class _SignupState extends State<Signup> {
                 CustomerTextField(
                   hintText: "Enter your Email",
                   labelText: "Email",
-                  controller: Provider.of<AuthProvider>(context).email,
+                  controller:
+                      Provider.of<MyAuthProvider.AuthProvider>(context).email,
                 ),
                 const SizedBox(
                   height: 10,
@@ -67,7 +75,8 @@ class _SignupState extends State<Signup> {
                   hintText: "Enter your Password",
                   labelText: "Password",
                   isObscure: _obscurePassword,
-                  controller: Provider.of<AuthProvider>(context).password,
+                  controller: Provider.of<MyAuthProvider.AuthProvider>(context)
+                      .password,
                 ),
                 const SizedBox(
                   height: 10,
@@ -87,7 +96,8 @@ class _SignupState extends State<Signup> {
                       labelText: "Re-enter Password",
                       isObscure: _obscurePassword,
                       controller:
-                          Provider.of<AuthProvider>(context).reEnterPassword,
+                          Provider.of<MyAuthProvider.AuthProvider>(context)
+                              .reEnterPassword,
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton.icon(
@@ -105,6 +115,14 @@ class _SignupState extends State<Signup> {
                       },
                     ),
                     const SizedBox(height: 10),
+                    GoogleAuthButton(
+                      onPressed: () {
+                        _signInWithGoogle();
+                      },
+                      style: AuthButtonStyle(
+                        iconType: AuthIconType.secondary,
+                      ),
+                    ),
                   ],
                 ),
                 Align(
@@ -124,7 +142,7 @@ class _SignupState extends State<Signup> {
                 const SizedBox(
                   height: 30,
                 ),
-                Consumer<AuthProvider>(
+                Consumer<MyAuthProvider.AuthProvider>(
                   builder: (context, value, child) {
                     return CustomButton(
                       text: "Sign up",
@@ -140,6 +158,33 @@ class _SignupState extends State<Signup> {
           ),
         ),
       ),
+    );
+  }
+
+  _signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+        // await _firebaseAuth.signInWithCredential(credential);
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+      }
+    } catch (e) {
+      //show toast
+      AlertHelpers.showAlert(context, "Something went wrong");
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Home()),
     );
   }
 }

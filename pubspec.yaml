@@ -58,6 +58,10 @@ dependencies:
   lottie: ^2.7.0
   text_field_suffix_button: ^0.1.0
   showcaseview: ^2.0.3
+  google_sign_in: ^6.1.6
+  font_awesome_flutter: ^10.6.0
+  sign_in_button: ^3.2.0
+  auth_buttons: ^1.0.1+4
 
 
 dev_dependencies:

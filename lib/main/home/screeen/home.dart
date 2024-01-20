@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -38,50 +39,77 @@ class _HomeState extends State<Home> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: SlideDrawer(), // Add your custom drawer here
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Container(
-            margin: const EdgeInsets.only(top: 20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () => _scaffoldKey.currentState?.openDrawer(),
-                      child: SvgPicture.asset(AppAssets.menuIcon),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Helpers.navigateToPage(context, const Cart());
-                      },
-                      child: SvgPicture.asset(
-                        AppAssets.cartIcon,
+      body: ShowCaseWidget(
+        builder: Builder(
+          builder: (context) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Showcase(
+                            key: globalKeyTwo,
+                            description: 'Click here to Show Slide Bar',
+                            child: InkWell(
+                              onTap: () =>
+                                  _scaffoldKey.currentState?.openDrawer(),
+                              child: SvgPicture.asset(AppAssets.menuIcon),
+                            ),
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                ShowCaseWidget.of(context)?.startShowCase([
+                                  globalKeyOne,
+                                  globalKeyTwo,
+                                  globalKeyThree,
+                                  globalKeyFour,
+                                ]);
+                              },
+                              child: Text("Showcase")),
+                          Showcase(
+                            key: globalKeyOne,
+                            description: 'Click here to Show Cart',
+                            //  shapeBorder: const CircleBorder(),
+
+                            child: InkWell(
+                              onTap: () {
+                                Helpers.navigateToPage(context, const Cart());
+                              },
+                              child: SvgPicture.asset(
+                                AppAssets.cartIcon,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: CustomText(
-                    "Furniture",
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primaryColor,
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          "Furniture",
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 21,
+                      ),
+                      // PRODUCT GRID
+                      ProductGrid(),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 21,
-                ),
-                // PRODUCT GRID
-                ProductGrid(),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -192,4 +220,3 @@ class ProductTile extends StatelessWidget {
     );
   }
 }
-

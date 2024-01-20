@@ -1,7 +1,11 @@
+import 'package:ar_visionary_explora/Setting/setting.dart';
+import 'package:ar_visionary_explora/contactUs/cotact_us.dart';
 import 'package:ar_visionary_explora/providers/auth_provider.dart';
 import 'package:ar_visionary_explora/aboutUs/screen/about_us.dart';
+import 'package:ar_visionary_explora/termsAndCondition/rems_and_condition.dart';
 import 'package:ar_visionary_explora/utils/constants/app_assets.dart';
 import 'package:ar_visionary_explora/utils/constants/app_colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,19 +51,24 @@ class SlideDrawer extends StatelessWidget {
                 ListTile(
                   title: Text('Contact Us'),
                   onTap: () {
-                    // Handle tap
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (c) => ContactUsPage()));
                   },
                 ),
                 ListTile(
                   title: Text('Terms & Conditions'),
                   onTap: () {
-                    // Handle tap
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => TermsAndConditionsPage()));
                   },
                 ),
                 ListTile(
                   title: Text('Settings'),
                   onTap: () {
-                    // Handle tap
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (c) => SettingsPage()));
                   },
                 ),
                 // Add more items here

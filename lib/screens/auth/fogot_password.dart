@@ -11,6 +11,7 @@ import 'package:ar_visionary_explora/providers/auth_provider.dart';
 import 'package:ar_visionary_explora/utils/constants/app_assets.dart';
 import 'package:ar_visionary_explora/utils/constants/app_colors.dart';
 import 'package:ar_visionary_explora/screens/auth/signup.dart';
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,7 @@ class _FogotPasswordState extends State<FogotPassword> {
                   fontWeight: FontWeight.w600,
                 ),
                 const SizedBox(
-                  height: 41,
+                  height: 30,
                 ),
                 const AppLogo(),
                 const SizedBox(
@@ -74,6 +75,16 @@ class _FogotPasswordState extends State<FogotPassword> {
                     },
                   );
                 }),
+                const SizedBox(
+                  height: 10,
+                ),
+                EmailAuthButton(
+                  onPressed: () {},
+                  style: AuthButtonStyle(
+                    buttonType: AuthButtonType.secondary,
+                    iconType: AuthIconType.secondary,
+                  ),
+                ),
                 const SizedBox(
                   height: 23,
                 ),
