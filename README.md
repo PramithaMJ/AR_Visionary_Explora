@@ -1,4 +1,5 @@
 # AR-Visionary Explora Project
+<img width="1603" alt="Screenshot 2024-02-19 at 10 50 10 AM" src="https://github.com/PramithaMJ/AR_Visionary_Explora/assets/123730262/487a5c16-3f56-4a0e-9cf7-04f6041e60b9">
 
 ## Introduction
 AR-Visionary Explora is a revolutionary mobile application designed to enhance the furniture e-commerce experience through the integration of augmented reality (AR) technology. This Flutter-based app empowers users to visualize and assess furniture items in their living spaces before making a purchase, revolutionizing the traditional furniture buying process.
