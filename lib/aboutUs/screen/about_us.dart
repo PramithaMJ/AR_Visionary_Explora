@@ -6,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 class AboutUsPage extends StatelessWidget {
   // Email address
   final String emailAddress = 'arvisionaryexplorer@example.com';
-
   // Open email app
   void _launchEmail() async {
     final Uri _emailLaunchUri = Uri(
@@ -25,7 +24,6 @@ class AboutUsPage extends StatelessWidget {
       print('Error launching email: $e');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
